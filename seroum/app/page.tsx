@@ -4,12 +4,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { Search, ShoppingBag, Calendar, Instagram, Youtube, Menu, X } from "lucide-react"
 import { useState } from "react"
+import Popup from "@/components/Popup"
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <div className="flex flex-col min-h-screen">
+      <Popup />
       {/* Top Bar */}
       <div className="hidden md:block border-b border-gray-200">
         <div className="container mx-auto px-4 py-2 flex justify-end items-center space-x-6 text-xs">
@@ -48,19 +50,19 @@ export default function Home() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#" className="text-gray-800 hover:text-amber-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
               SEROUM소개
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-amber-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
               수액센터
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-amber-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
               비만센터
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-amber-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
               고객후기
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-amber-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
               게시판
             </Link>
           </nav>
@@ -88,35 +90,35 @@ export default function Home() {
               <nav className="flex flex-col space-y-4">
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-amber-700 font-medium py-2 border-b border-gray-100"
+                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   SEROUM소개
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-amber-700 font-medium py-2 border-b border-gray-100"
+                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   수액센터
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-amber-700 font-medium py-2 border-b border-gray-100"
+                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   비만센터
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-amber-700 font-medium py-2 border-b border-gray-100"
+                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   고객후기
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-amber-700 font-medium py-2"
+                  className="text-gray-800 hover:text-brown-700 font-medium py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   게시판
@@ -130,7 +132,7 @@ export default function Home() {
       {/* Side Buttons */}
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
         <div className="flex flex-col">
-          <div className="bg-amber-700 text-white p-4 flex flex-col items-center justify-center">
+          <div className="bg-brown-700 text-white p-4 flex flex-col items-center justify-center">
             <Calendar className="h-6 w-6 mb-2" />
             <span className="text-xs writing-mode-vertical transform rotate-0 whitespace-nowrap">RESERVATION</span>
           </div>
@@ -142,7 +144,21 @@ export default function Home() {
               <Youtube className="h-5 w-5" />
             </Link>
             <Link href="#" className="flex flex-col items-center">
-              <span className="font-bold text-xl">S</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                />
+              </svg>
+              <span className="text-xs mt-1">챗봇 상담</span>
             </Link>
           </div>
         </div>
@@ -176,10 +192,10 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gray-50 p-8 rounded-lg text-center">
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-amber-700"
+                    className="h-8 w-8 text-brown-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -198,17 +214,17 @@ export default function Home() {
                 <p>  다양한 건강 솔루션을 제공합니다.</p>
                 <Link
                   href="#"
-                  className="inline-block mt-6 text-amber-700 font-medium hover:text-amber-800 transition-colors"
+                  className="inline-block mt-6 text-brown-700 font-medium hover:text-brown-800 transition-colors"
                 >
                   자세히 보기 →
                 </Link>
               </div>
 
               <div className="bg-gray-50 p-8 rounded-lg text-center">
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-amber-700"
+                    className="h-8 w-8 text-brown-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -228,7 +244,7 @@ export default function Home() {
                 </p>
                 <Link
                   href="#"
-                  className="inline-block mt-6 text-amber-700 font-medium hover:text-amber-800 transition-colors"
+                  className="inline-block mt-6 text-brown-700 font-medium hover:text-brown-800 transition-colors"
                 >
                   자세히 보기 →
                 </Link>
@@ -270,15 +286,15 @@ export default function Home() {
                   </p>
                   <div className="flex flex-col space-y-2">
                     <div className="flex items-center">
-                      <span className="text-amber-700 font-bold text-lg">60,000원</span>
+                      <span className="text-brown-700 font-bold text-lg">60,000원</span>
                       <span className="ml-2 text-sm text-gray-500">/ 1회 (60분)</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-amber-700 font-bold text-lg">216,000원</span>
+                      <span className="text-brown-700 font-bold text-lg">216,000원</span>
                       <span className="ml-2 text-sm text-gray-500">/ 4회 코스 (1회 60분)</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-amber-700 font-bold text-lg">288,000원</span>
+                      <span className="text-brown-700 font-bold text-lg">288,000원</span>
                       <span className="ml-2 text-sm text-gray-500">/ 6회 코스 (1회 60분)</span>
                     </div>
                   </div>
@@ -289,15 +305,15 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-gray-600">백옥</p>
-                      <span className="text-amber-700 font-bold">30,000원</span>
+                      <span className="text-brown-700 font-bold">30,000원</span>
                     </div>
                     <div>
                       <p className="text-gray-600">백옥더블</p>
-                      <span className="text-amber-700 font-bold">50,000원</span>
+                      <span className="text-brown-700 font-bold">50,000원</span>
                     </div>
                     <div>
                       <p className="text-gray-600">가슴샘</p>
-                      <span className="text-amber-700 font-bold">80,000원</span>
+                      <span className="text-brown-700 font-bold">80,000원</span>
                     </div>
                   </div>
                 </div>
@@ -305,7 +321,7 @@ export default function Home() {
                 <div>
                   <Link
                     href="#"
-                    className="inline-block bg-amber-700 text-white px-6 py-3 rounded-md font-medium hover:bg-amber-800 transition-colors"
+                    className="inline-block bg-brown-700 text-white px-6 py-3 rounded-md font-medium hover:bg-brown-800 transition-colors"
                   >
                     프로그램 상세보기
                   </Link>
@@ -327,10 +343,10 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gray-50 p-8 rounded-lg">
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mb-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-amber-700"
+                    className="h-8 w-8 text-brown-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -349,16 +365,16 @@ export default function Home() {
                   디저트약, 취침약 처방 가능합니다.
                 </p>
                 <div className="flex items-center">
-                  <span className="text-amber-700 font-bold text-lg">금액미정정</span>
+                  <span className="text-brown-700 font-bold text-lg">금액미정정</span>
                   <span className="ml-2 text-sm text-gray-500">/ 1회 상담</span>
                 </div>
               </div>
 
               <div className="bg-gray-50 p-8 rounded-lg">
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mb-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-amber-700"
+                    className="h-8 w-8 text-brown-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -376,15 +392,15 @@ export default function Home() {
                   체중 감량과 대사 촉진을 위한 특화된 비만수액 프로그램을 제공합니다.
                 </p>
                 <div className="flex items-center">
-                  <span className="text-amber-700 font-bold text-lg">금액미정</span>
+                  <span className="text-brown-700 font-bold text-lg">금액미정</span>
                 </div>
               </div>
 
               <div className="bg-gray-50 p-8 rounded-lg">
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mb-6">
+                <div className="w-16 h-16 bg-brown-100 rounded-full flex items-center justify-center mb-6">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-amber-700"
+                    className="h-8 w-8 text-brown-700"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -402,7 +418,7 @@ export default function Home() {
                   부작용관리, 혈당모니터링, 체성분검사, 의사진료면담 등 추후 관리까지도 가능합니다.
                 </p>
                 <div className="flex items-center">
-                  <span className="text-amber-700 font-bold text-lg">금액미정</span>
+                  <span className="text-brown-700 font-bold text-lg">금액미정</span>
                   <span className="ml-2 text-sm text-gray-500">/ 1회</span>
                 </div>
               </div>
@@ -411,7 +427,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Link
                 href="#"
-                className="inline-block bg-amber-700 text-white px-8 py-4 rounded-md font-medium hover:bg-amber-800 transition-colors"
+                className="inline-block bg-brown-700 text-white px-8 py-4 rounded-md font-medium hover:bg-brown-800 transition-colors"
               >
                 비만센터 자세히 보기
               </Link>
@@ -527,7 +543,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Link
                 href="#"
-                className="inline-block bg-amber-700 text-white px-8 py-4 rounded-md font-medium hover:bg-amber-800 transition-colors"
+                className="inline-block bg-brown-700 text-white px-8 py-4 rounded-md font-medium hover:bg-brown-800 transition-colors"
               >
                 더 많은 후기 보기
               </Link>
@@ -536,7 +552,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-amber-700 text-white">
+        <section className="py-20 bg-brown-700 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">지금 바로 상담 예약하세요</h2>
             <p className="max-w-2xl mx-auto mb-8 opacity-90">
@@ -545,13 +561,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#"
-                className="inline-block bg-white text-amber-700 px-8 py-4 rounded-md font-bold hover:bg-gray-100 transition-colors"
+                className="inline-block bg-white text-brown-700 px-8 py-4 rounded-md font-bold hover:bg-gray-100 transition-colors"
               >
                 무료 상담 예약
               </Link>
               <Link
                 href="#"
-                className="inline-block border border-white text-white px-8 py-4 rounded-md font-bold hover:bg-amber-800 transition-colors"
+                className="inline-block border border-white text-white px-8 py-4 rounded-md font-bold hover:bg-brown-800 transition-colors"
               >
                 프로그램 안내
               </Link>

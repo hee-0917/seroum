@@ -3,11 +3,25 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Search, ShoppingBag, Calendar, Instagram, Youtube, Menu, X } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Popup from "@/components/Popup"
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [slide, setSlide] = useState(0)
+  const slideImages = [
+    "/beautiful-face-hero.png",
+    "/iv-img4.png",
+    "/iv-img5.png",
+    "/iv-logo.png"
+  ]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlide((prev) => (prev + 1) % slideImages.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -37,7 +51,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 flex justify-between items-center h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" onClick={() => window.location.reload()}>
               <Image
                 src="/sekang-hospital-logo.png"
                 alt="세강병원 SEKANG HOSPITAL"
@@ -50,19 +64,19 @@ export default function Home() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
+            <Link href="/" className="text-gray-800 hover:text-brown-700 font-bold">
               SEROUM소개
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
+            <Link href="/iv-center" className="text-gray-800 hover:text-brown-700 font-bold">
               수액센터
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
+            <Link href="/slimbody" className="text-gray-800 hover:text-brown-700 font-bold">
               비만센터
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-bold">
               고객후기
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-brown-700 font-medium">
+            <Link href="#" className="text-gray-800 hover:text-brown-700 font-bold">
               게시판
             </Link>
           </nav>
@@ -89,36 +103,36 @@ export default function Home() {
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-4">
                 <Link
-                  href="#"
-                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
+                  href="/"
+                  className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   SEROUM소개
                 </Link>
                 <Link
-                  href="#"
-                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
+                  href="/iv-center"
+                  className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   수액센터
                 </Link>
                 <Link
-                  href="#"
-                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
+                  href="/slimbody"
+                  className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   비만센터
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-brown-700 font-medium py-2 border-b border-gray-100"
+                  className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   고객후기
                 </Link>
                 <Link
                   href="#"
-                  className="text-gray-800 hover:text-brown-700 font-medium py-2"
+                  className="text-gray-800 hover:text-brown-700 font-bold py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   게시판
@@ -137,10 +151,20 @@ export default function Home() {
             <span className="text-xs writing-mode-vertical transform rotate-0 whitespace-nowrap">RESERVATION</span>
           </div>
           <div className="bg-gray-900 text-white p-4 flex flex-col items-center space-y-6">
-            <Link href="#" className="flex flex-col items-center">
+            <Link 
+              href="https://www.instagram.com/sekanghospital/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex flex-col items-center"
+            >
               <Instagram className="h-5 w-5" />
             </Link>
-            <Link href="#" className="flex flex-col items-center">
+            <Link 
+              href="https://www.youtube.com/@SEKANG_HOSPITAL" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex flex-col items-center"
+            >
               <Youtube className="h-5 w-5" />
             </Link>
             <Link href="#" className="flex flex-col items-center">
@@ -167,9 +191,25 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <section className="relative h-screen">
-          <Image src="/beautiful-face-hero.png" alt="Premium Beauty Treatment" fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-          <div className="absolute inset-0 flex flex-col justify-center px-4 md:px-10 lg:px-20">
+          {slideImages.map((src, idx) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`메인 슬라이드${idx+1}`}
+              fill
+              className={`object-cover transition-opacity duration-1000 ${slide === idx ? 'opacity-100 z-0' : 'opacity-0 z-0'}`}
+              priority={idx === 0}
+              style={{
+                transition: 'opacity 1s',
+                objectFit: 'cover',
+                width: '100%',
+                height: '100%',
+                objectPosition: src === '/iv-logo.png' ? 'center 55%' : 'center'
+              }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
+          <div className="absolute inset-0 flex flex-col justify-center px-4 md:px-10 lg:px-20 z-20">
             <div className="max-w-xl">
               <h2 className="text-xl md:text-2xl font-medium text-white mb-4">세강병원</h2>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-script">SEROUM</h1>
@@ -185,9 +225,9 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl font-bold mb-6">세로움 SEROUM 소개</h2>
               <div className="text-gray-600 leading-relaxed space-y-2">
-                <p>세로움은 수액센터와 비만센터를 운영하며 개인별 맞춤 처방으로</p>
+                <p>세로움 SEROUM은 수액센터와 비만센터를 운영하며 개인별 맞춤 처방으로</p>
                 <p>건강과 아름다움을 위한 최적의 솔루션을 제공합니다.</p>
-                                            </div>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -257,9 +297,9 @@ export default function Home() {
         <section className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="text-3xl font-bold mb-6">프리미엄 수액 프로그램</h2>
+              <h2 className="text-3xl font-bold mb-6">수액센터 프로그램</h2>
               <p className="text-gray-600 leading-relaxed">
-                세로움 클리닉은 다양한 수액 프로그램을 통해 고객님의 건강과 아름다움을 관리합니다.
+                세로움 SEROUM은 다양한 수액 프로그램을 통해 고객님의 건강과 아름다움을 관리합니다.
               </p>
             </div>
 
@@ -268,9 +308,9 @@ export default function Home() {
                 <Image
                   src="/premium-iv-therapy.png"
                   alt="프리미엄 미용 수액 치료"
-                  width={600}
-                  height={400}
-                  className="rounded-lg w-full h-auto object-cover shadow-md"
+                  width={800}
+                  height={600}
+                  className="rounded-lg w-full h-[500px] object-cover shadow-md"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2">
                   아름다움과 건강을 위한 프리미엄 비타민 수액 테라피
@@ -337,7 +377,7 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl font-bold mb-6">비만센터 프로그램</h2>
               <p className="text-gray-600 leading-relaxed">
-                세로움 클리닉의 비만센터는 과학적이고 체계적인 비만 관리 프로그램을 제공합니다.
+              세로움 SEROUM의 비만센터는 과학적이고 체계적인 비만 관리 프로그램을 제공합니다.
               </p>
             </div>
 
@@ -441,7 +481,7 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl font-bold mb-6">고객 후기</h2>
               <p className="text-gray-600 leading-relaxed">
-                세로움 클리닉을 이용하신 고객님들의 생생한 후기를 확인해보세요.
+                세로움 SEROUM을 이용하신 고객님들의 생생한 후기를 확인해보세요.
               </p>
             </div>
 
@@ -555,9 +595,10 @@ export default function Home() {
         <section className="py-20 bg-brown-700 text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl font-bold mb-6">지금 바로 상담 예약하세요</h2>
-            <p className="max-w-2xl mx-auto mb-8 opacity-90">
-              세로움 클리닉의 전문 의료진이 1:1 맞춤 상담을 통해 최적의 수액 & 비만 프로그램을 제안해 드립니다.
-            </p>
+            <div className="max-w-2xl mx-auto mb-8 opacity-90 space-y-2">
+              <p>세로움 SEROUM의 전문 의료진이 1:1 맞춤 상담을 통해</p>
+              <p>최적의 수액 & 비만 프로그램을 제안해 드립니다.</p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="#"
@@ -581,7 +622,7 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl font-bold mb-6">찾아오시는 길</h2>
               <p className="text-gray-600 leading-relaxed">
-                세로움 클리닉은 편리한 위치에 있으며, 쾌적한 환경에서 최상의 서비스를 제공합니다.
+              세로움 SEROUM은 편리한 위치에 있으며, 쾌적한 환경에서 최상의 서비스를 제공합니다.
               </p>
             </div>
 
@@ -648,10 +689,20 @@ export default function Home() {
                 <span className="font-bold">SEROUM</span> 건강한 아름다움을 위한 프리미엄 수액&비만클리닉
               </p>
               <div className="flex space-x-4">
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link 
+                  href="https://www.instagram.com/sekanghospital/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-white"
+                >
                   <Instagram className="h-5 w-5" />
                 </Link>
-                <Link href="#" className="text-gray-400 hover:text-white">
+                <Link 
+                  href="https://www.youtube.com/@SEKANG_HOSPITAL" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-white"
+                >
                   <Youtube className="h-5 w-5" />
                 </Link>
               </div>

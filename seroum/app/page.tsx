@@ -51,7 +51,14 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 flex justify-between items-center h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center" onClick={() => window.location.reload()}>
+            <Link
+              href="/"
+              className="flex items-center"
+              onClick={e => {
+                e.preventDefault();
+                window.location.replace("/");
+              }}
+            >
               <Image
                 src="/sekang-hospital-logo.png"
                 alt="세강병원 SEKANG HOSPITAL"
@@ -64,15 +71,66 @@ export default function Home() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-800 hover:text-brown-700 font-bold">
-              SEROUM소개
-            </Link>
-            <Link href="/iv-center" className="text-gray-800 hover:text-brown-700 font-bold">
-              수액센터
-            </Link>
-            <Link href="/slimbody" className="text-gray-800 hover:text-brown-700 font-bold">
-              비만센터
-            </Link>
+            <div className="relative group">
+              <Link href="/about" className="text-gray-800 hover:text-brown-700 font-bold flex items-center">
+                SEROUM소개
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-1">
+                  <Link href="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    SEROUM의 특별함
+                  </Link>
+                  <Link href="/doctors" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    의료진 소개
+                  </Link>
+                  <Link href="/equipment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    보유장비 소개
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <Link href="/iv-center" className="text-gray-800 hover:text-brown-700 font-bold flex items-center">
+                수액센터
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-1">
+                  <Link href="/iv-center/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    수액센터 소개
+                  </Link>
+                  <Link href="/iv-center/programs" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    수액 프로그램
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <Link href="/slimbody" className="text-gray-800 hover:text-brown-700 font-bold flex items-center">
+                비만센터
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-1">
+                  <Link href="/slimbody/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    비만센터 소개
+                  </Link>
+                  <Link href="/slimbody/programs" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    비만 프로그램
+                  </Link>
+                  <Link href="/slimbody/equipment" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    장비 소개
+                  </Link>
+                </div>
+              </div>
+            </div>
             <Link href="#" className="text-gray-800 hover:text-brown-700 font-bold">
               고객후기
             </Link>
@@ -103,11 +161,32 @@ export default function Home() {
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-4">
                 <Link
-                  href="/"
+                  href="/about"
                   className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   SEROUM소개
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-gray-600 hover:text-brown-700 py-2 pl-4 border-b border-gray-100 text-sm"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  SEROUM의 특별함
+                </Link>
+                <Link
+                  href="/doctors"
+                  className="text-gray-600 hover:text-brown-700 py-2 pl-4 border-b border-gray-100 text-sm"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  의료진 소개
+                </Link>
+                <Link
+                  href="/equipment"
+                  className="text-gray-600 hover:text-brown-700 py-2 pl-4 border-b border-gray-100 text-sm"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  보유장비 소개
                 </Link>
                 <Link
                   href="/iv-center"
@@ -198,7 +277,7 @@ export default function Home() {
               alt={`메인 슬라이드${idx+1}`}
               fill
               className={`object-cover transition-opacity duration-1000 ${slide === idx ? 'opacity-100 z-0' : 'opacity-0 z-0'}`}
-              priority={idx === 0}
+              priority
               style={{
                 transition: 'opacity 1s',
                 objectFit: 'cover',
@@ -214,8 +293,8 @@ export default function Home() {
               <h2 className="text-xl md:text-2xl font-medium text-white mb-4">세강병원</h2>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-script">SEROUM</h1>
               <p className="text-white text-lg md:text-xl mb-8">건강한 아름다움을 위한 프리미엄 수액 & 비만 솔루션</p>
-              <p className="text-gray-200 text-xs">AI생성 이미지 입니다.</p>
-            </div>
+              <p className="text-gray-200 text-xs">해당 이미지는 AI로 생성되었습니다.</p>           
+                          </div>
           </div>
         </section>
 
@@ -253,7 +332,7 @@ export default function Home() {
                   개인 맞춤형 수액 처방으로 영양 공급, 피로 회복, 면역력 증진 등 </p>
                 <p>  다양한 건강 솔루션을 제공합니다.</p>
                 <Link
-                  href="#"
+                  href="/iv-center"
                   className="inline-block mt-6 text-brown-700 font-medium hover:text-brown-800 transition-colors"
                 >
                   자세히 보기 →
@@ -283,7 +362,7 @@ export default function Home() {
                 <p>건강한 체중 감량과 체형 관리를 도와드립니다.
                 </p>
                 <Link
-                  href="#"
+                  href="/slimbody"
                   className="inline-block mt-6 text-brown-700 font-medium hover:text-brown-800 transition-colors"
                 >
                   자세히 보기 →
@@ -466,7 +545,7 @@ export default function Home() {
 
             <div className="text-center mt-12">
               <Link
-                href="#"
+                href="/slimbody"
                 className="inline-block bg-brown-700 text-white px-8 py-4 rounded-md font-medium hover:bg-brown-800 transition-colors"
               >
                 비만센터 자세히 보기

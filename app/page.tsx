@@ -202,25 +202,45 @@ export default function Home() {
                 >
                   비만센터
                 </Link>
-                <Link
-                  href="#"
-                  className="text-gray-800 hover:text-brown-700 font-bold py-2 border-b border-gray-100"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  고객후기
-                </Link>
-                <Link
-                  href="#"
-                  className="text-gray-800 hover:text-brown-700 font-bold py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  게시판
-                </Link>
               </nav>
             </div>
           </div>
         )}
       </header>
+
+      {/* Hero Section */}
+      <section className="relative w-full h-[600px] overflow-hidden">
+        <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
+          {slideImages.map((src, index) => (
+            <div
+              key={src}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === slide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Image
+                src={src}
+                alt={`Slide ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">세강병원</h1>
+            <p className="text-xl md:text-2xl mb-8">건강한 삶을 위한 최선의 선택</p>
+            <Link
+              href="/about"
+              className="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
+            >
+              자세히 보기
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Side Buttons */}
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block">
@@ -268,36 +288,6 @@ export default function Home() {
       </div>
 
       <main>
-        {/* Hero Section */}
-        <section className="relative h-screen">
-          {slideImages.map((src, idx) => (
-            <Image
-              key={src}
-              src={src}
-              alt={`메인 슬라이드${idx+1}`}
-              fill
-              className={`object-cover transition-opacity duration-1000 ${slide === idx ? 'opacity-100 z-0' : 'opacity-0 z-0'}`}
-              priority
-              style={{
-                transition: 'opacity 1s',
-                objectFit: 'cover',
-                width: '100%',
-                height: '100%',
-                objectPosition: src === '/iv-logo.png' ? 'center 55%' : 'center'
-              }}
-            />
-          ))}
-          <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
-          <div className="absolute inset-0 flex flex-col justify-center px-4 md:px-10 lg:px-20 z-20">
-            <div className="max-w-xl">
-              <h2 className="text-xl md:text-2xl font-medium text-white mb-4">세강병원</h2>
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-script">SEROUM</h1>
-              <p className="text-white text-lg md:text-xl mb-8">건강한 아름다움을 위한 프리미엄 수액 & 비만 솔루션</p>
-              <p className="text-gray-200 text-xs">해당 이미지는 AI로 생성되었습니다.</p>           
-                          </div>
-          </div>
-        </section>
-
         {/* About Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
